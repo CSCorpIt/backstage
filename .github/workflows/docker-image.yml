@@ -16,4 +16,5 @@ jobs:
        yarn tsc
        yarn build:backend
        docker image build . -f packages/backend/Dockerfile --tag cspower/backstage:latest
-       docker push cspower/backstage:latest
+       echo $CR_PAT | docker login ghcr.io -u USERNAME --password-stdin
+       docker push ghcr.io/dev/backstage:latest
