@@ -39,6 +39,8 @@ jobs:
         yarn install --immutable
         yarn tsc
         yarn build:backend
+        IMAGE_NAME=$(echo "${{ secrets.REPOSITORY_NAME }}" | tr '[:upper:]' '[:lower:]')
+        echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
         docker image build . -f packages/backend/Dockerfile --tag ${{ env.IMAGE_NAME }}
         docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }} 
 
