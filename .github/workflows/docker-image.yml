@@ -2,19 +2,36 @@ name: Docker Image CI
 
 on: workflow_dispatch
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
 jobs:
 
   build:
 
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
+
     steps:
-    - uses: actions/checkout@v4
-    - name: Build the Docker image
-      run: |
-       yarn install --immutable
-       yarn tsc
-       yarn build:backend
-       docker image build . -f packages/backend/Dockerfile --tag cspower/backstage:latest
-       echo $CR_PAT | docker login ghcr.io -u USERNAME --password-stdin
-       docker push ghcr.io/dev/backstage:latest
+     - name: Checkout repository
+       uses: actions/checkout@v4
+     - name: Log in to the Container registry
+       uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+       with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          
+     - name: Build the Docker image
+       run: |
+        yarn install --immutable
+        yarn tsc
+        yarn build:backend
+        docker image build . -f packages/backend/Dockerfile --tag cspower/backstage:latest
+        docker push ghcr.io/CSCorpIt/backstage:latest
