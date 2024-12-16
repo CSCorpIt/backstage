@@ -15,5 +15,5 @@ jobs:
        yarn install --immutable
        yarn tsc
        yarn build:backend
-       docker image build . -f packages/backend/Dockerfile --tag backstage
+       docker image build . -f packages/backend/Dockerfile --tag cspower/backstage:latest
        docker push cspower/backstage:latest
