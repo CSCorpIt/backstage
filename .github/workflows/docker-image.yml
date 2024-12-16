@@ -16,3 +16,4 @@ jobs:
        yarn tsc
        yarn build:backend
        docker image build . -f packages/backend/Dockerfile --tag backstage
+       docker push cspower/backstage:latest
