@@ -27,19 +27,13 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
-     - name: Extract metadata (tags, labels) for Docker
-       id: meta
-       uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
-       with:
-        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}     
+  
           
      - name: Build the Docker image
        run: |
+        ls -ltr 
         yarn install --immutable
         yarn tsc
         yarn build:backend
-        IMAGE_NAME=$(echo "${{ secrets.REPOSITORY_NAME }}" | tr '[:upper:]' '[:lower:]')
-        echo "IMAGE_NAME=$IMAGE_NAME" >> $GITHUB_ENV
         docker image build . -f packages/backend/Dockerfile --tag  ${{ env.REGISTRY }}/cscorpit/backstage:latest
         docker push ${{ env.REGISTRY }}/cscorpit/backstage:latest
