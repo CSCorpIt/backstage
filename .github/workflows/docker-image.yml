@@ -31,10 +31,8 @@ jobs:
           
      - name: Build the Docker image
        run: |
-        ls -ltr 
         yarn install --immutable
         yarn tsc
         yarn build:backend
-        yarn build-image
-        docker tag backstage:latest ghcr.io/backstage:latest
-        docker push ${{ env.REGISTRY }}/backstage:latest
+        docker image build . -f packages/backend/Dockerfile --tag  ${{ env.REGISTRY }}/cscorpit/backstage:latest
+        docker push ${{ env.REGISTRY }}/cscorpit/backstage:latest
