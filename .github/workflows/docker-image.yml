@@ -35,5 +35,5 @@ jobs:
         yarn install --immutable
         yarn tsc
         yarn build:backend
-        docker image build . -f packages/backend/Dockerfile --tag  ${{ env.REGISTRY }}/cscorpit/backstage:latest
-        docker push ${{ env.REGISTRY }}/cscorpit/backstage:latest
+        yarn build-image
+        docker push ${{ env.REGISTRY }}/backstage:latest
