@@ -16,9 +16,10 @@ FROM node:18-bullseye-slim
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Update package lists and install curl
+# Update package lists and install curl and gpg
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
     apt-get update && \
-    apt-get install -y curl apt-transport-https && \
+    apt-get install -y curl apt-transport-https gpg && \
     curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.asc.gpg && \
     echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ bullseye main" > /etc/apt/sources.list.d/azure-cli.list && \
     apt-get update && \
