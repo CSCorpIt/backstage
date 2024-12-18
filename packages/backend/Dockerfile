@@ -11,6 +11,24 @@
 
 FROM node:18-bullseye-slim
 
+
+# Set environment variables for non-interactive installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Update package lists and install curl
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    apt-get update && \
+    apt-get install -y curl apt-transport-https && \
+    curl -sL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.asc.gpg && \
+    echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ bullseye main" > /etc/apt/sources.list.d/azure-cli.list && \
+    apt-get update && \
+    apt-get install -y azure-cli && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+# Verify installation
+RUN curl --version && az --version
+
 # Set Python interpreter for `node-gyp` to use
 ENV PYTHON=/usr/bin/python3
 
