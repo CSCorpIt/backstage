@@ -13,9 +13,9 @@ backend:
   # all interfaces, the most permissive setting. The right value depends on your specific deployment.
   listen: ':7007'
   cors:
-    origin: http://localhost
+    origin: http://48.216.147.136
     methods: [GET, HEAD, PATCH, POST, PUT, DELETE,OPTIONS]
-    credentials: false
+    credentials: true
 
   # config options: https://node-postgres.com/apis/client
   database:
