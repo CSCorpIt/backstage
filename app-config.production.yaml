@@ -44,9 +44,20 @@ integrations:
     #   token: ${GHE_TOKEN}
 
 auth:
+  environment: production
   providers:
     guest: {}
-
+    github:
+      production:
+        clientId: Ov23liDb8ERnwQqIKqW6
+        clientSecret: 5699effbb95dab93cee6d89b91e9b9a410f41f97
+        signIn:
+          resolvers:
+            # Matches the GitHub username with the Backstage user entity name.
+            # See https://backstage.io/docs/auth/github/provider#resolvers for more resolvers.
+            - resolver: usernameMatchingUserEntityName 
+    
+    
 catalog:
   # Overrides the default list locations from app-config.yaml as these contain example data.
   # See https://backstage.io/docs/features/software-catalog/#adding-components-to-the-catalog for more details
