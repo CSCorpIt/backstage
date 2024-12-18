@@ -15,6 +15,10 @@ backend:
     origin: http://localhost
     methods: [GET, HEAD, PATCH, POST, PUT, DELETE,OPTIONS]
     credentials: true
+  csp:
+    connect-src: ["'self'", 'http:', 'https:']
+    upgrade-insecure-requests: false
+  
 
   # config options: https://node-postgres.com/apis/client
   database:
