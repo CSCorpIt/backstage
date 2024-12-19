@@ -65,7 +65,7 @@ export function createExampleAction() {
           console.log("ACCESS TOKEN: " + access_token);
       
           // Perform the POST request using the fetched access token
-          const postResponse = await fetch("https://graph.microsoft.com/v1.0/applications/d59d0228-1ee1-4168-89df-8d1a3030d8db/federatedIdentityCredentials", {
+          const postResponse = await fetch(`https://graph.microsoft.com/v1.0/applications/${ctx.input.appId}/federatedIdentityCredentials`, {
             method: 'POST',
             headers: {
               'Authorization': `Bearer ${access_token}`,
