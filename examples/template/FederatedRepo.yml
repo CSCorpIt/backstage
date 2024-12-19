@@ -1,0 +1,34 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+# https://backstage.io/docs/features/software-catalog/descriptor-format#kind-template
+kind: Template
+metadata:
+  name: create-fed-repo
+  title: Create Federated Repo
+  description: Creates a Federated credention for a given Azure Application and Repository
+spec:
+  owner: ecarlos.a.silva@gmail.com
+  type: service
+
+  # These parameters are used to generate the input form in the frontend, and are
+  # used to gather input data for the execution of the template.
+  parameters:
+    - title: General Settings
+      required:
+        - repo
+      properties:
+        repo:
+          title: Repository Name
+          type: string
+          description: Name of the Repository to be federated
+        appId:
+          title: Azure Application ID
+          type: string
+          description: Name of the Repository to be federated 
+  steps:
+    # Each step executes an action, in this case one templates files into the working directory.
+    - id: federation
+      name: Federation
+      action: azure:federation
+      input:
+        repoName: ${{ parameters.repo }}
+        appId: ${{ parameters.appId }}
