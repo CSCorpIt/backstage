@@ -82,3 +82,9 @@ catalog:
       target: ./examples/org.yaml
       rules:
         - allow: [User, Group]
+
+     # Local example template
+    - type: file
+      target: ../../examples/template/FederatedRepo.yml
+      rules:
+        - allow: [Template]    
