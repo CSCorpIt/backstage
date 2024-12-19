@@ -85,6 +85,6 @@ catalog:
 
      # Local example template
     - type: file
-      target: ../../examples/template/FederatedRepo.yml
+      target: ./examples/template/FederatedRepo.yml
       rules:
         - allow: [Template]    
