@@ -58,18 +58,42 @@ export function createExampleAction() {
             'Metadata': 'true'
           },
         });
-
+      
         if (response.ok) {
           const jsonResponse = await response.json();
           let access_token = jsonResponse.access_token;
           console.log("ACCESS TOKEN: " + access_token);
+      
+          // Perform the POST request using the fetched access token
+          const postResponse = await fetch("https://graph.microsoft.com/v1.0/applications/d59d0228-1ee1-4168-89df-8d1a3030d8db/federatedIdentityCredentials", {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${access_token}`,
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              name: "example_federated_credential",
+              issuer: "https://login.microsoftonline.com/0dcd7d6a-ba5c-44b2-8858-b89a508cc2fd/v2.0",
+              subject: "repo:org/repo:ref:refs/heads/main",
+              audiences: [
+                "api://AzureADTokenExchange"
+              ]
+            })
+          });
+      
+          if (postResponse.ok) {
+            const postJsonResponse = await postResponse.json();
+            console.log("POST Response:", postJsonResponse);
+          } else {
+            console.error("Failed to perform POST request:", postResponse.statusText);
+          }
         } else {
           console.error('Failed to fetch installations:', response.statusText);
-          return; // Exit the function if the installations fetch fails
         }
       } catch (error) {
-        console.error('An error occurred while fetching the access token:', error);
+        console.error('An error occurred:', error);
       }
+      
 
 
       await new Promise(resolve => setTimeout(resolve, 1000));
