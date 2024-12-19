@@ -72,9 +72,9 @@ export function createExampleAction() {
               'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-              name: "example_federated_credential",
+              name: `${ctx.input.repoName}_federated_credential`,
               issuer: "https://login.microsoftonline.com/0dcd7d6a-ba5c-44b2-8858-b89a508cc2fd/v2.0",
-              subject: "repo:org/repo:ref:refs/heads/main",
+              subject: `${ctx.input.repoName}:org/${ctx.input.repoName}:ref:refs/heads/main`,
               audiences: [
                 "api://AzureADTokenExchange"
               ]
