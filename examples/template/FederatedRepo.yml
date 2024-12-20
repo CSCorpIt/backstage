@@ -24,6 +24,15 @@ spec:
           title: Azure Application ID
           type: string
           description: Name of the Repository to be federated 
+        org:
+          title: Github Org
+          type: string
+          description: Name of the Org of the Repository
+        environment:
+          title: Github Org
+          type: string
+          description: Workflow Environment    
+  
   steps:
     # Each step executes an action, in this case one templates files into the working directory.
     - id: federation
