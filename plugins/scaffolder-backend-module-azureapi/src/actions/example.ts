@@ -15,6 +15,8 @@ export function createExampleAction() {
   return createTemplateAction<{
     repoName: string;
     appId: string;
+    org : string;
+    environment: string;
   }>({
     id: 'azure:federation',
     description: 'Creates federates credentials',
@@ -32,20 +34,23 @@ export function createExampleAction() {
             title: 'Application Id',
             description: "Name of the application",
             type: 'string',
+          },
+          org: {
+            title: 'Application Org',
+            description: "Name of the application's org",
+            type: 'string',
+          },
+          environment: {
+            title: 'Application Environment',
+            description: "Name of the application's org",
+            type: 'string',
           }
         },
       },
     },
     async handler(ctx) {
       ctx.logger.info(
-
         `Running example template with parameters: ${ctx.input.repoName}`,
-
-
-
-
-
-
       );
 
 
@@ -74,7 +79,7 @@ export function createExampleAction() {
             body: JSON.stringify({
               name: `${ctx.input.repoName}_federated_credential`,
               issuer: "https://login.microsoftonline.com/0dcd7d6a-ba5c-44b2-8858-b89a508cc2fd/v2.0",
-              subject: `${ctx.input.repoName}:org/${ctx.input.repoName}:ref:refs/heads/main`,
+              subject: `repo:${ctx.input.org}/${ctx.input.repoName}:environment:${ctx.input.environment}`,
               audiences: [
                 "api://AzureADTokenExchange"
               ]

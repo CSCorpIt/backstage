@@ -30,5 +30,8 @@ spec:
       name: Federation
       action: azure:federation
       input:
-        repoName: ${{ parameters.repo }}
         appId: ${{ parameters.appId }}
+        org: ${{ parameters.org }}
+        repoName: ${{ parameters.repo }}
+        environment: ${{ parameters.branch }}
+        
