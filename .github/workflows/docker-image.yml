@@ -9,7 +9,7 @@ env:
 jobs:
 
   call-workflow-passing-data:
-    uses: reusable-workflows/.github/workflows/aks_deploy.yml@main
+    uses: CSCorIt/reusable-workflows/.github/workflows/aks_deploy.yml@main
     with:
       azure-tenant-id: '0dcd7d6a-ba5c-44b2-8858-b89a508cc2fd'
       azure-sub-id: '19c90abf-d616-4f8c-b887-f0490119b05a'
