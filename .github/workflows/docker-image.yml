@@ -11,13 +11,10 @@ jobs:
   call-workflow-passing-data:
     uses: CSCorpIt/reusable-workflows/.github/workflows/aks_deploy.yml@main
     with:
-      azure-tenant-id: '0dcd7d6a-ba5c-44b2-8858-b89a508cc2fd'
-      azure-sub-id: '19c90abf-d616-4f8c-b887-f0490119b05a'
-      azure-client-id: 'db133da9-263c-4b70-a231-2ec42b721d0f'
       azure-aks: 'backstage-aks'
       azure-aks-rg: 'backstage-aks-rg'
     secrets:
-      azure_github_secret: ${{ secrets.azure_github_app }}
+      azure_github_secret: ${{ secrets.AZURE_CREDENTIALS }}
       
   build:
 
