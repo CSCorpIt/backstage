@@ -18,7 +18,7 @@ jobs:
       azure-aks: 'backstage-aks'
       azure-aks-rg: 'backstage-aks-rg'
     secrets:
-      personal_access_token: ${{ secrets.azure_github_app }}
+      azure_github_secret: ${{ secrets.azure_github_app }}
       
   build:
 
