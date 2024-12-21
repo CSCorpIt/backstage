@@ -6,8 +6,14 @@ env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
 
-jobs:
+permissions:
+    contents: read
+    packages: write
+    attestations: write
+    id-token: write
 
+jobs:
+     
   call-workflow-passing-data:
     uses: CSCorpIt/reusable-workflows/.github/workflows/aks_deploy.yml@main
     with:
