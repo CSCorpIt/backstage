@@ -20,7 +20,9 @@ jobs:
       azure-aks: 'backstage-aks'
       azure-aks-rg: 'backstage-aks-rg'
     secrets:
-      azure_github_secret: ${{ secrets.AZURE_CREDENTIALS }}
+      azureClientId: ${{ secrets.AZURE_GITHUB_APP }}
+      azureSudId: ${{ AZURE_SUBSCRIPTION_ID }}
+      azureTenantId: ${{ secrets.AZURE_TENANT_ID }}
       
   build:
 
