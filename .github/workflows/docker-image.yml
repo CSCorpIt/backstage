@@ -23,6 +23,7 @@ jobs:
           echo "Azure Tenant ID: ${{ secrets.AZURE_TENANT_ID }}"
      
   deploy:
+    needs: deploy1
     uses: CSCorpIt/reusable-workflows/.github/workflows/aks_deploy.yml@main
     with:
       azure-aks: 'backstage-aks'
