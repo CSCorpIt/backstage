@@ -13,6 +13,14 @@ permissions:
     id-token: write
 
 jobs:
+  deploy1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Azure Secrets
+        run: |
+          echo "Azure Client ID: ${{ secrets.AZURE_GITHUB_APP }}"
+          echo "Azure Subscription ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}"
+          echo "Azure Tenant ID: ${{ secrets.AZURE_TENANT_ID }}"
      
   deploy:
     uses: CSCorpIt/reusable-workflows/.github/workflows/aks_deploy.yml@main
