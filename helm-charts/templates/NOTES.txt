@@ -1,0 +1,12 @@
+Thank you for installing the Backstage Helm Chart!
+
+You can verify the installation using:
+
+  kubectl get all -l app=backstage-backend
+  kubectl get all -l app=postgres
+
+To access Backstage Backend:
+  kubectl get svc backstage-backend-service
+
+To access PostgreSQL Service:
+  kubectl get svc postgres-service

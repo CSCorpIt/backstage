@@ -1,0 +1,26 @@
+# Global configurations
+global:
+  imagePullSecret: ghcr-secret
+
+# Backstage backend configurations
+backstage:
+  replicas: 1
+  image: ghcr.io/cscorpit/backstage:latest
+  containerPort: 80
+  servicePort: 80
+  targetPort: 7007
+  memoryLimits: "512Mi"
+  cpuLimits: "500m"
+  memoryRequests: "256Mi"
+  cpuRequests: "250m"
+  githubToken: "YOUR_GITHUB_TOKEN"
+
+# PostgreSQL configurations
+postgres:
+  replicas: 1
+  image: postgres
+  storageSize: 5Gi
+  user: postgres
+  password: "141109"
+  servicePort: 5432
+  pgDataPath: "/var/lib/postgresql/data/pgdata"

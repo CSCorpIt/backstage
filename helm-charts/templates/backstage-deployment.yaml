@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backstage-backend-deployment
+  labels:
+    app: backstage-backend
+spec:
+  replicas: {{ .Values.backstage.replicas }}
+  selector:
+    matchLabels:
+      app: backstage-backend
+  template:
+    metadata:
+      labels:
+        app: backstage-backend
+    spec:
+      containers:
+        - name: backstage-backend
+          image: {{ .Values.backstage.image }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.backstage.containerPort }}
+          resources:
+            limits:
+              memory: {{ .Values.backstage.memoryLimits }}
+              cpu: {{ .Values.backstage.cpuLimits }}
+            requests:
+              memory: {{ .Values.backstage.memoryRequests }}
+              cpu: {{ .Values.backstage.cpuRequests }}
+          env:
+            - name: GITHUB_TOKEN
+              value: {{ .Values.backstage.githubToken }}
+      imagePullSecrets:
+        - name: {{ .Values.global.imagePullSecret }}
